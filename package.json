@@ -18,10 +18,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/therootcompany/x-hub-signature.js.git"
+    "url": "git+https://github.com/therootcompany/x-hub.js.git"
   },
   "keywords": [
     "x-hub-signature",
+    "x-hub-signature-256",
     "webhook",
     "auth",
     "authentication",
@@ -36,9 +37,9 @@
   "author": "AJ ONeal <aj@therootcompany.com> (https://therootcompany.com/)",
   "license": "SEE LICENSE IN LICENSE",
   "bugs": {
-    "url": "https://github.com/therootcompany/x-hub-signature.js/issues"
+    "url": "https://github.com/therootcompany/x-hub.js/issues"
   },
-  "homepage": "https://github.com/therootcompany/x-hub-signature.js#readme",
+  "homepage": "https://github.com/therootcompany/x-hub.js#readme",
   "devDependencies": {
     "zora": "^5.2.0"
   }

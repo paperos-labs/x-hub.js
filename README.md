@@ -1,6 +1,18 @@
-# x-hub.js
+# [x-hub.js](https://github.com/therootcompany/x-hub.js)
 
-X-Hub-Signature tools - lightweight, zero-dependency, WebCrypto
+X-Hub-Signature tools - lightweight, zero-dependency, JS with Types, WebCrypto
+
+```js
+let header = req.headers["x-hub-signature-256"];
+let equal = await xhub.verify(header, payload);
+```
+
+```js
+app.use("/api/webhooks/github", xhubMiddleware.hashPayload);
+app.use("/api", bodyParser.json());
+
+app.post("/api/webhooks/github", xhubMiddleware.verifyPayload, handleWebhook);
+```
 
 Works with GitHub, Facebook, and many other service that provide webhooks with
 HMAC signatures.
@@ -75,7 +87,8 @@ let header =
   "sha256=2d9425c2ae617d90196c5d22f48370822036174914268970cc864a7095b065dd";
 let payload = JSON.stringify({ foo: "bar" });
 
-await xhub.verify(header, payload);
+let equal = await xhub.verify(header, payload);
+console.log(equal);
 ```
 
 ## How to Sign a Webhook Header
@@ -122,7 +135,8 @@ let payload = JSON.stringify({ foo: "bar" });
 let payloadBytes = encoder.encode(payload);
 
 let hashType = "SHA-256";
-await xhub.verifyBytes(sigBytes, payloadBytes, hashType);
+let equal = await xhub.verifyBytes(sigBytes, payloadBytes, hashType);
+console.log(equal);
 ```
 
 ## How to Raw Sign Bytes
