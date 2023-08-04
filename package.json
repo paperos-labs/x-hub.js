@@ -1,0 +1,45 @@
+{
+  "name": "x-hub",
+  "version": "1.0.0",
+  "description": "X-Hub-Signature tools - lightweight, zero-dependency, WebCrypto",
+  "main": "x-hub-signature.js",
+  "files": [
+    "express.js",
+    "fetch.js",
+    "x-hub-signature.js"
+  ],
+  "scripts": {
+    "bump": "npm version -m \"chore(release): bump to v%s\"",
+    "fmt": "npx -p prettier@3 -- prettier -w '**/*.{js,md}'",
+    "jshint": "npx -p jshint@2 -- jshint -c .jshintrc --reporter unix ./",
+    "lint": "npm run jshint && npm run tsc",
+    "test": "node ./test.js",
+    "tsc": "npx -p typescript@5 -- tsc -p ./jsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/therootcompany/x-hub-signature.js.git"
+  },
+  "keywords": [
+    "x-hub-signature",
+    "webhook",
+    "auth",
+    "authentication",
+    "sign",
+    "verify",
+    "signer",
+    "signing",
+    "signature",
+    "github",
+    "facebook"
+  ],
+  "author": "AJ ONeal <aj@therootcompany.com> (https://therootcompany.com/)",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/therootcompany/x-hub-signature.js/issues"
+  },
+  "homepage": "https://github.com/therootcompany/x-hub-signature.js#readme",
+  "devDependencies": {
+    "zora": "^5.2.0"
+  }
+}
