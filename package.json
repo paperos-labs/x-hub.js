@@ -1,6 +1,6 @@
 {
   "name": "x-hub",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "X-Hub-Signature tools - lightweight, zero-dependency, WebCrypto",
   "main": "x-hub-signature.js",
   "files": [
