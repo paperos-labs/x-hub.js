@@ -17,12 +17,19 @@ app.post("/api/webhooks/github", xhubMiddleware.verifyPayload, handleWebhook);
 Works with GitHub, Facebook, and many other service that provide webhooks with
 HMAC signatures.
 
+- Install
 - How to Verify with Express
 - How to Test with Fetch
 - How to Verify a Webhook header
 - How to Sign a Webhook header
 - How to Raw Verify Bytes
 - How to Raw Sign Bytes
+
+## Install
+
+```sh
+npm install --save x-hub
+```
 
 ## How to Verify with Express
 
@@ -35,18 +42,26 @@ let xhubMiddleware = XHubExpress.create({ secret, hashes });
 
 app.use("/api/webhooks/github", xhubMiddleware.hashPayload);
 app.use("/api", bodyParser.json());
+app.post("/api/webhooks/github", xhubMiddleware.verifyPayload, handleWebhook);
+app.use("/", handleErrors);
 
-app.post(
-  "/api/webhooks/github",
-  xhubMiddleware.verifyPayload,
-  async function (req, res) {
-    let body = req.body;
+async function handleWebhook(req, res) {
+  let body = req.body;
 
-    // do stuff
+  // do stuff
 
-    res.json({ success: true });
-  },
-);
+  res.json({ success: true });
+}
+
+function handleErrors(err, req, res, next) {
+  if ("E_XHUB_WEBHOOK" !== e) {
+    throw e;
+  }
+
+  // ...
+
+  res.json({ error: e.message });
+}
 ```
 
 ## How to Test with Fetch
