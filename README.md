@@ -54,7 +54,7 @@ async function handleWebhook(req, res) {
 }
 
 function handleErrors(err, req, res, next) {
-  if ("E_XHUB_WEBHOOK" !== e) {
+  if ("E_XHUB_WEBHOOK" !== e.code) {
     throw e;
   }
 
