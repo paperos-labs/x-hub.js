@@ -41,6 +41,7 @@
   },
   "homepage": "https://github.com/therootcompany/x-hub.js#readme",
   "devDependencies": {
+    "@types/express": "^4.17.17",
     "zora": "^5.2.0"
   }
 }
