@@ -19,7 +19,7 @@
 /** @type {XHubFetchPackage} */
 let XHubFetch = module.exports;
 
-let XHub = require("../x-hub-signature.js");
+let XHub = require("./x-hub-signature.js");
 
 // "application/json"
 // "application/json; charset=utf-8"

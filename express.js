@@ -3,7 +3,7 @@
 /** @type {XHubExpressPackage} */
 let XHubExpress = module.exports;
 
-let XHub = require("../x-hub-signature.js");
+let XHub = require("./x-hub-signature.js");
 
 /**
  * @typedef XHubExpressPackage
