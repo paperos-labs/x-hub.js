@@ -9,6 +9,7 @@ let XHub = require("./x-hub-signature.js");
  * @typedef XHubExpressPackage
  * @prop {XHubExpressCreate} create
  * @prop {String} XHubExpress._mismatchSignature
+ * @prop {String} XHubExpress._missingSignature
  * @prop {_XHubPipe} _pipe
  * @returns {XHubExpress}
  */
@@ -29,7 +30,9 @@ let XHub = require("./x-hub-signature.js");
  */
 
 XHubExpress._mismatchSignature =
-  "X-Hub-Signature-256 does not match sha256 hmac of the request body using the shared key";
+  "X-Hub-Signature(-256) does not match sha1/sha256 hmac of the request body using the shared key";
+
+XHubExpress._missingSignature = "X-Hub-Signature(-256) is not present";
 
 XHubExpress.create = function (opts) {
   let xhub = XHub.create(opts);
@@ -60,7 +63,7 @@ XHubExpress.create = function (opts) {
 
     if (!xhubSig) {
       //@ts-ignore
-      req[xhubParam] = Promise.resolve(false);
+      req[xhubParam] = null;
       next();
       return;
     }
@@ -92,6 +95,14 @@ XHubExpress.create = function (opts) {
 
   /** @type {import('express').Handler} */
   routes.verifyPayload = async function (req, res, next) {
+    //@ts-ignore
+    let p = req[xhubParam];
+    if (!p) {
+      let err = createError(XHubExpress._missingSignature);
+      next(err);
+      return;
+    }
+
     //@ts-ignore
     let result = await req[xhubParam];
     if (true === result) {
