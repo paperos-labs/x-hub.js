@@ -8,7 +8,7 @@ let equal = await xhub.verify(header, payload);
 ```
 
 ```js
-app.use("/api/webhooks/github", xhubMiddleware.hashPayload);
+app.use("/api/webhooks/github", xhubMiddleware.readPayload);
 app.use("/api", bodyParser.json());
 
 app.post("/api/webhooks/github", xhubMiddleware.verifyPayload, handleWebhook);
@@ -40,7 +40,7 @@ let secret = "It's a secret to everybody!";
 let hashes = ["sha256", "sha1"];
 let xhubMiddleware = XHubExpress.create({ secret, hashes });
 
-app.use("/api/webhooks/github", xhubMiddleware.hashPayload);
+app.use("/api/webhooks/github", xhubMiddleware.readPayload);
 app.use("/api", bodyParser.json());
 app.post("/api/webhooks/github", xhubMiddleware.verifyPayload, handleWebhook);
 app.use("/", handleErrors);
