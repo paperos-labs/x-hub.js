@@ -16,6 +16,7 @@ let encoder = new TextEncoder();
 
 /**
  * @typedef XHubSignature
+ * @prop {String} _defaultHash
  * @prop {XHubSign} sign
  * @prop {XHubSignBytes} signBytes
  * @prop {XHubVerify} verify
@@ -47,6 +48,8 @@ XHub.create = function ({ secret, hashes }) {
   let keyBytes = encoder.encode(secret);
 
   let xhub = {};
+
+  xhub._defaultHash = defaultHash;
 
   /** @type XHubSignBytes */
   xhub.signBytes = async function (payloadBytes, algo = algHash) {

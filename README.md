@@ -54,13 +54,13 @@ async function handleWebhook(req, res) {
 }
 
 function handleErrors(err, req, res, next) {
-  if ("E_XHUB_WEBHOOK" !== e.code) {
-    throw e;
+  if ("E_XHUB_WEBHOOK" !== err.code) {
+    throw err;
   }
 
   // ...
 
-  res.json({ error: e.message });
+  res.json({ error: err.message });
 }
 ```
 
@@ -69,22 +69,19 @@ function handleErrors(err, req, res, next) {
 You can test against your server.
 
 ```js
-let XHub = require("x-hub");
 let XHubFetch = require("x-hub/fetch.js");
-let xhub = XHubFetch.create({ secret, hashes });
+let xhub = XHubFetch.create({ secret });
 
-let url = "http://example.com/api/webhoks/github";
+let url = "http://example.com/api/webhooks/github";
 let payload = JSON.stringify({ foo: "bar" });
-let header256 = await xhub.sign(opts.body, "sha256");
 let resp = await xhub.fetch(url, {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
-    "X-Hub-Signature-256": header256,
   },
   body: payload,
 });
-let data = resp.json();
+let data = await resp.json();
 
 console.log(data);
 ```

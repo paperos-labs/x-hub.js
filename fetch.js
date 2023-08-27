@@ -36,23 +36,23 @@ XHubFetch.create = function (options) {
     if (!opts?.body) {
       throw new Error("no 'body' to sign");
     }
+
     //@ts-ignore
-    let header = await xhub.sign(opts.body, "sha256");
+    let hashName = opts.hash || xhub._defaultHash;
+    //@ts-ignore
+    let header = await xhub.sign(opts.body, hashName);
 
     let fetchOpts = Object.assign({}, opts);
-    if (!fetchOpts.headers) {
-      /** @type {Object.<String, String>} */
-      let headers = {};
-      let isSha256 = header.startsWith("sha256=");
-      if (isSha256) {
-        headers["X-Hub-Signature-256"] = header;
-      } else {
-        headers["X-Hub-Signature"] = header;
-      }
 
-      //@ts-ignore
-      Object.assign(fetchOpts.headers, headers);
+    /** @type {Object.<String, String>} */
+    let headers = {};
+    let isSha256 = header.startsWith("sha256=");
+    if (isSha256) {
+      headers["X-Hub-Signature-256"] = header;
+    } else {
+      headers["X-Hub-Signature"] = header;
     }
+    fetchOpts.headers = Object.assign(headers, fetchOpts.headers);
 
     let resp = await fetch(url, fetchOpts);
     return resp;
