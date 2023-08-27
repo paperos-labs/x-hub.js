@@ -1,4 +1,4 @@
-# [x-hub.js](https://github.com/therootcompany/x-hub.js)
+# [x-hub.js](https://github.com/savvi-legal/x-hub.js)
 
 X-Hub-Signature tools - lightweight, zero-dependency, JS with Types, WebCrypto
 
